@@ -1,0 +1,37 @@
+name: "Version Labeling"
+description: "Action for version labeling"
+author: "Juser0"
+
+branding:
+  icon: "tag"
+  color: "blue"
+
+inputs:
+  info:
+    description: Information for version labeling
+    default: commit
+    required: false
+  type:
+    description: Display type for version
+    default: semver
+    required: false
+  fallback:
+    description: Fallback tag to use when no previous tag can be found
+    default: 1.0.0
+    required: false
+    
+outputs:
+  version:
+    description: The version value
+    value: ${{ steps.logic.outputs.version }}
+    
+runs:
+  using: "composite"
+  steps:
+    - id: logic
+      run: ./${{ github.action_path }}/script.sh
+      shell: bash
+      with:
+        info: ${{ inputs.info }}
+        type: ${{ inputs.type }}
+        fallback: ${{ inputs.fallback }}
