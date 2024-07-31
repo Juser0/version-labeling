@@ -29,5 +29,5 @@ runs:
   using: "composite"
   steps:
     - id: logic
-      run: ./${{ github.action_path }}/script.sh ${{ inputs.info }} ${{ inputs.type }} ${{ inputs.fallback }}
+      run: ./src/script.sh ${{ inputs.info }} ${{ inputs.type }} ${{ inputs.fallback }}
       shell: bash
